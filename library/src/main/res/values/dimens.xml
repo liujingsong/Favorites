@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimen_corner_card_radius">6dp</dimen>
+    <dimen name="dimen_panel_elevation">2dp</dimen>
+    <dimen name="default_panel_bottom_size">16sp</dimen>
+    <dimen name="default_panel_mode_size">16sp</dimen>
+</resources>

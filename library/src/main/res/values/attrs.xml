@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FavoritePicker">
+        <attr name="mode" format="enum">
+            <enum name="empty" value="1"></enum>
+            <enum name="fill" value="2"></enum>
+            <enum name="done" value="3"></enum>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="FavoritePickerTheme">
+        <attr name="favoritePickerStyle" format="reference" />
+    </declare-styleable>
+</resources>
