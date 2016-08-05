@@ -58,6 +58,7 @@ public class FavoritePicker extends LinearLayout {
         final TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.FavoritePicker,
                 defStyleAttr, 0);
         MODE = attributes.getInt(R.styleable.FavoritePicker_mode, DEFAULT_MODE);
+        mSpace = Utils.dp2px(getContext(), 5);
         attributes.recycle();
         prepareData();
         updateByMode();
@@ -94,12 +95,26 @@ public class FavoritePicker extends LinearLayout {
 
     private TextView mDoneTextView;
 
+    /*设置栅格总数*/
+    public void setLimitFavo(int limit){
+        LIMIT_FAVO = limit;
+    }
+
+    /*设置栅格间距*/
+    public void setSpace(int space){
+        mSpace = space;
+    }
+    /*设置栅格列数*/
+    public void setColumnNumber(int columnNumber){
+        COLUMN_NUM = columnNumber;
+    }
+
     private void updateByMode() {
         removeAllViews();/*can be better*/
         mPanel = (LinearLayout) inflate(getContext(), R.layout.picker_panel, null);
         mPickerContainer = (FlexboxLayout) mPanel.findViewById(R.id.picker);
         callOnCancel(mPanel.findViewById(R.id.cancel));
-        mSpace = Utils.dp2px(getContext(), 5);
+
         if (MODE == MODE_EMPTY) {
             generateGrid(1, COLUMN_NUM);
         } else if (MODE == MODE_FILL) {

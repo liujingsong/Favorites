@@ -18,6 +18,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FavoritePicker picker= (FavoritePicker) findViewById(R.id.picker);
+        picker.setLimitFavo(5);
+        picker.setColumnNumber(3);
         List<Favo> favos = new ArrayList<>();
         favos.add(new Favo(0,"第一张","http://download.easyicon.net/png/1082117/128/"));
         favos.add(new Favo(0,"第二张","http://download.easyicon.net/png/1082114/128/"));
