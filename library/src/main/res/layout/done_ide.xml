@@ -5,8 +5,11 @@
     android:layout_alignParentLeft="true"
     android:layout_centerVertical="true"
     android:layout_margin="4dp"
+    android:padding="6dp"
+    android:gravity="center"
     android:clickable="true"
     android:focusable="true"
+    android:textColor="@android:color/primary_text_light"
     android:textSize="@dimen/default_panel_mode_size"
     android:text="@string/mode_done_text">
 

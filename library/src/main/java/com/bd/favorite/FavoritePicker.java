@@ -3,8 +3,11 @@ package com.bd.favorite;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,6 +42,8 @@ public class FavoritePicker extends LinearLayout {
     private int DEFAULT_MODE = MODE_EMPTY;
     private LinearLayout mPanel;
     private FlexboxLayout mPickerContainer;
+    private ViewGroup mParent;
+    private FrameLayout mMakerContainer;
 
     public FavoritePicker(Context context) {
         this(context, null);
@@ -87,6 +92,8 @@ public class FavoritePicker extends LinearLayout {
 
     private ImageView mDeleteImageView;
 
+    private TextView mDoneTextView;
+
     private void updateByMode() {
         removeAllViews();/*can be better*/
         mPanel = (LinearLayout) inflate(getContext(), R.layout.picker_panel, null);
@@ -101,8 +108,20 @@ public class FavoritePicker extends LinearLayout {
             callOnDelete(mDeleteImageView);
         } else if (MODE == MODE_DONE) {
             generateGrid(LIMIT_FAVO, COLUMN_NUM);
+            mDoneTextView = (TextView) ((ViewStub) mPanel.findViewById(R.id.done)).inflate();
+            callOnDone(mDoneTextView);
         }
         addView(mPanel);
+    }
+
+    private void callOnDone(View view) {
+        view.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MODE = MODE_FILL;
+                updateByMode();
+            }
+        });
     }
 
 
@@ -136,8 +155,8 @@ public class FavoritePicker extends LinearLayout {
         int size = mData.size();
         Favo favo;
         for (int index = 0; index < totalNum; index++) {
-            item = (ImageButton) inflate(getContext(), R.layout.picker_grid_item, null);
-            callOnPick(item,size, index);
+            item = (ImageButton) inflate(getContext(), R.layout.image_panel, null);
+            callOnPick(item, size, index);
             load(item, size, index);
             item.setLayoutParams(lp);
             mPickerContainer.addView(item);
@@ -150,7 +169,7 @@ public class FavoritePicker extends LinearLayout {
         if (MODE == MODE_DONE && size > index) {
             BadgeView bv = new BadgeView(getContext(), item);
             delete(bv, index);
-            bv.setText("-");
+            bv.setText("—");
             bv.show();
         }
     }
@@ -163,17 +182,79 @@ public class FavoritePicker extends LinearLayout {
         }
     }
 
+    /*for test*/
+    public Favo generateFavo() {
+        return new Favo(4, "第四张", "http://download.easyicon.net/png/1082117/128/");
+    }
+
+
+
+
     private void callOnPick(View view, int size, int index) {
         if (size <= index) {
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO Favo Maker dev
-                    Toast.makeText(getContext(), "show Favo maker!", Toast.LENGTH_LONG).show();
+
+                    Favo favo = generateFavo();
+                    if (null == mMakerContainer) {
+                        setupMaker(favo);
+                    } else {
+                        updateMaker(favo, mMakerContainer);
+                        mParent.addView(mMakerContainer);
+                    }
+
                 }
             });
         }
+    }
 
+    private void setupMaker(Favo favo) {
+        mParent = (ViewGroup) FavoritePicker.this.getParent();
+        mMakerContainer = new FrameLayout(getContext());
+        mMakerContainer.setBackgroundResource(R.color.light_black_overlay);
+        mMakerContainer.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        FavoMaker maker = new FavoMaker(getContext());
+        FrameLayout.LayoutParams makerParams = new FrameLayout.LayoutParams(Utils.dp2px(getContext(), 240f), Utils.dp2px(getContext(), 360f));
+        makerParams.gravity = Gravity.CENTER;
+        maker.setLayoutParams(makerParams);
+        mMakerContainer.addView(maker);
+        mParent.addView(mMakerContainer);
+
+        updateMaker(favo, mMakerContainer);
+
+        BadgeView badgeView = new BadgeView(getContext(), maker);
+        badgeView.setText("X");
+        badgeView.show();
+        callOnCancelMaker(badgeView);
+    }
+
+    private void updateMaker(final Favo favo, View container) {
+        ImageButton mImagePanel = (ImageButton) container.findViewById(R.id.image_panel);
+        Glide.with(getContext()).load(favo.getImageUrl()).into(mImagePanel);
+        callOnSaveFavo(favo, container);
+    }
+
+    private void callOnSaveFavo(final Favo favo, View container) {
+        container.findViewById(R.id.save_favo).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mParent.removeView(mMakerContainer);
+                mData.add(favo);
+                MODE = MODE_FILL;
+                updateByMode();
+            }
+        });
+    }
+
+
+    private void callOnCancelMaker(BadgeView badgeView) {
+        badgeView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mParent.removeView(mMakerContainer);
+            }
+        });
     }
 
     private void delete(BadgeView bv, final int index) {

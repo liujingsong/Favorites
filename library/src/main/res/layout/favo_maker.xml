@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="240dp"
+    android:layout_height="360dp"
+    android:layout_gravity="center"
+    android:background="@drawable/corner_card">
+
+    <include
+        android:id="@+id/maker_header"
+        layout="@layout/maker_header" />
+
+    <include
+        android:id="@+id/image_panel"
+        layout="@layout/image_panel"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_below="@id/maker_header" />
+
+    <include
+        android:id="@+id/maker_bottom"
+        android:layout_below="@id/image_panel"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        layout="@layout/maker_bottom"/>
+
+
+</RelativeLayout>

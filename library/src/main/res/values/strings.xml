@@ -2,4 +2,6 @@
     <string name="app_name">library</string>
     <string name="mode_done_text">完成</string>
     <string name="panel_title">收藏位置</string>
+    <string name="maker_commit_text">保存</string>
+    <string name="maker_edit_hint">描述不能超过10个字符</string>
 </resources>

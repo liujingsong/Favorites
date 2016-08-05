@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:singleLine="true"
+    android:layout_margin="@dimen/default_title_margin"
+    android:text="将当前位置添加为常用位置"
+    android:textColor="@android:color/primary_text_light"
+    android:textSize="@dimen/default_title_text_size" />
