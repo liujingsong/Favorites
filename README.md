@@ -7,6 +7,23 @@
 ![step3.png](art/step3.png)
 
 ### 使用说明
+
+### Gradle:
+Step 1. Add the JitPack repository to your build file
+Add it in your root build.gradle at the end of repositories:
+
+	allprojects {
+		repositories {
+			...
+			maven { url "https://jitpack.io" }
+		}
+	}
+Step 2. Add the dependency
+
+	dependencies {
+	        compile 'com.github.liujingsong:Favorites:-SNAPSHOT'
+	}
+
 #### 添加schemas:
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
