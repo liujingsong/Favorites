@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:clickable="false"
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/add_favorite">
+    </ImageButton>
+
+<TextView
+    android:clickable="false"
+    android:textColor="@android:color/white"
+    android:visibility="invisible"
+    android:background="@drawable/favo_text_bg"
+    android:id="@+id/description"
+    android:layout_alignParentBottom="true"
+    android:padding="4dp"
+    android:singleLine="true"
+    android:text="位置"
+    android:textSize="@dimen/fave_description_text_size"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+</RelativeLayout>

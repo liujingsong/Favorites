@@ -13,7 +13,9 @@
         android:supportsRtl="true">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Activity_Transparent">
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:screenOrientation="sensor"
+            android:theme="@style/Dialog_Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

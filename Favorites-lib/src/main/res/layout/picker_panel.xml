@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/panel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/corner_card_white"
+    android:elevation="@dimen/dimen_panel_elevation"
+    android:orientation="vertical">
+
+    <include layout="@layout/panel_header" />
+
+    <include layout="@layout/picker_view_ide"/>
+
+    <include layout="@layout/panel_botton"/>
+
+</LinearLayout>

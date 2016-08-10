@@ -1,10 +1,21 @@
 ### 效果：
+
+#### 竖屏：
+
 ![step0.png](art/step0.png)
 ![step1.png](art/step1.png)
 
 
 ![step2.png](art/step2.png)
 ![step3.png](art/step3.png)
+
+
+#### 横屏：
+
+![step4.png](art/step4.png)
+
+
+![step5.png](art/step5.png)
 
 ### 使用说明
 
@@ -48,9 +59,57 @@ Step 2. Add the dependency
     picker.setSpace(5);
     /*设置栅格列数*/
     picker.setColumnNumber(3);
+
+    /*设置操作监听*/
+    picker.setOperatorListener(mOperatorListener);
+
     List<Favo> favos = new ArrayList<>();
     favos.add(new Favo(0,"第一张","http://download.easyicon.net/png/1082117/128/"));
     favos.add(new Favo(0,"第二张","http://download.easyicon.net/png/1082114/128/"));
     favos.add(new Favo(0,"第三张","http://download.easyicon.net/png/1082113/128/"));
     favos.add(new Favo(0,"第四张","http://download.easyicon.net/png/1082115/128/"));
     picker.bind(favos);
+
+		private OperatorListener mOperatorListener = new OperatorListener() {
+		@Override
+		public void onCancel() {
+
+		}
+
+		@Override
+		public void onDone() {
+
+		}
+
+		@Override
+		public String onPick() {
+			//TODO 这里返回 新建收藏 imageUrl
+
+			return "http://download.easyicon.net/png/1082115/128/";
+		}
+
+		@Override
+		public void onSelect(Favo favo) {
+
+		}
+
+		@Override
+		public void onIntoDelete() {
+
+		}
+
+		@Override
+		public void onFavoMakerCancel() {
+
+		}
+
+		@Override
+		public void onFavoMakerSave(List<Favo> favos) {
+
+		}
+
+		@Override
+		public void onFavoDelete() {
+
+		}
+};
